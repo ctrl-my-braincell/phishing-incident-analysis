@@ -1,84 +1,43 @@
-Observed Behavior
 
-The request returned an HTTP 301 redirect.
+# Suspected E-Commerce Phishing Email — Incident Analysis
 
-The redirect ultimately reached:
+## Overview
 
-https://shopee.co.id/buyer/login/
+This repository documents the defensive investigation of a suspicious e-commerce email that initially appeared consistent with a phishing/social-engineering attempt.
 
-The final response returned:
+The investigation examines:
 
-HTTP/2 200
-Interpretation
+- Email metadata
+- Sender authentication
+- Social-engineering indicators
+- URL structure
+- HTTP redirects
+- Destination infrastructure
+- Threat-intelligence results
+- Investigation limitations
 
-The destination resolved to legitimate Shopee infrastructure.
+## Incident Summary
 
-The redirect chain therefore does not independently establish that the
-destination was a phishing page.
+An unsolicited email was received claiming that the recipient's Shopee account was scheduled for permanent deletion due to inactivity.
 
-Further investigation of the original email and authentication headers
-is required.
+The message used urgency and a direct login prompt to encourage the recipient to interact with an embedded hyperlink.
 
+Initial investigation focused on determining whether the message and associated URL were malicious.
 
-That gives you a **real technical artifact**, rather than just screenshots.
+## Current Assessment
 
----
+The email contains characteristics commonly associated with phishing and social engineering.
 
-# 6. Then make your IOC file
+However, technical analysis identified legitimate Shopee infrastructure in the email metadata and URL redirect chain.
 
-Create:
+The available evidence does not currently establish that the destination was a credential-harvesting page.
 
-```text
-iocs/iocs.md
+Further analysis of the complete email authentication headers and delivery path is required.
 
-Example:
+## Investigation
 
-# Indicators of Interest
+The URL was analyzed in an isolated Linux environment using:
 
-| Type | Value | Assessment |
-|---|---|---|
-| Domain | shopee.co.id | Legitimate Shopee regional domain observed |
-| URL path | /universal-link/buyer/login/ | Observed in email |
-| Parameter | deep_and_web=1 | Observed |
-| Sender domain | mail.shopee.co.id | Observed in email metadata |
-
-> Note: Indicators are documented as observed artifacts and are not automatically
-> classified as malicious.
-
-The URL returned an HTTP 301 redirect and ultimately reached a Shopee Indonesia login endpoint returning HTTP 200 OK.
-
-The email metadata also showed:
-
-From: info@mail.shopee.co.id
-Reply-To: info@mail.shopee.co.id
-Mailed-by: mail.shopee.co.id
-Signed-by: mail.shopee.co.id
-
-These observations require further analysis of the original Authentication-Results headers before making a definitive authentication assessment.
-
-Evidence
-
-Screenshots and supporting evidence will be added to the evidence/ directory.
-
-Sensitive information such as personal email addresses, unique tracking identifiers, message IDs, and other identifying information will be redacted before publication.
-
-Limitations
-
-This investigation does not currently establish that:
-
-the sender was definitively malicious;
-the destination was a phishing page;
-credentials were harvested; or
-the email was spoofed.
-
-The investigation remains classified as:
-
-Suspected phishing / social engineering — further analysis required.
-
-Defensive Lessons
-
-This investigation demonstrates the importance of correlating multiple sources of evidence rather than relying on a single indicator or automated verdict.
-
-The investigation process includes:
-
-Email context → Authentication → URL analysis → HTTP behavior → Infrastructure → Threat intelligence → Assessment
+```bash
+curl -sIL "[REDACTED_URL]"
+```
