@@ -1,0 +1,116 @@
+Authentication Results — Sanitized Evidence
+
+Source: Gmail "Show original" full message headers
+
+## Authentication Results
+
+The receiving Gmail server reported the following authentication results:
+
+```text
+DKIM: pass
+SPF: pass
+DMARC: pass
+```
+
+### SPF
+
+```text
+spf=pass
+```
+
+The receiving server reported that the sending IP was authorized by the SPF policy for the envelope sender domain.
+
+Sending IP:
+
+```text
+[REDACTED]
+```
+
+Envelope sender domain:
+
+```text
+mail.shopee.co.id
+```
+
+### DKIM
+
+```text
+dkim=pass
+```
+
+The message contained a valid DKIM signature.
+
+Signing domain:
+
+```text
+mail.shopee.co.id
+```
+
+DKIM selector:
+
+```text
+smtp1
+```
+
+The DKIM signing domain matches the domain shown in the visible `From:` address.
+
+### DMARC
+
+```text
+dmarc=pass
+```
+
+The authenticated `From:` domain was:
+
+```text
+mail.shopee.co.id
+```
+
+The header also reported:
+
+```text
+p=REJECT
+sp=REJECT
+dis=NONE
+```
+
+These values describe the domain's DMARC policy and disposition. They do not indicate a DMARC failure. The actual authentication result was `dmarc=pass`.
+
+## Additional Delivery Evidence
+
+The message was received by Gmail from:
+
+```text
+smtp3223-fr4.mail-messaging.com
+```
+
+The connection to Gmail used:
+
+```text
+TLS 1.3
+```
+
+The sending IP has been redacted from this public repository.
+
+## Redacted Identifiers
+
+The following values have intentionally been removed from the public evidence:
+
+* Recipient email address
+* Message-ID
+* Recipient-specific Return-Path
+* Sending IP address
+* Unique tracking URLs
+* `X-IB-WebHookData`
+* `X-IB-WebHookData2`
+* Other unique message or recipient identifiers
+
+## Interpretation
+
+The available header evidence shows that SPF, DKIM, and DMARC authentication all passed for this message.
+
+This provides evidence that the message was authenticated through the domains and infrastructure represented in the headers.
+
+Authentication success does not independently establish that the message content is safe or that the sender's business intent is legitimate. Authentication primarily provides evidence about domain authorization, message signing, and DMARC alignment.
+
+The authentication results should therefore be correlated with the message content, URL destination, redirect behavior, infrastructure, and other investigation evidence.
