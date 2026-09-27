@@ -1,6 +1,6 @@
-Authentication Results — Sanitized Evidence
+# Authentication Results — Sanitized Evidence
 
-Source: Gmail "Show original" full message headers
+**Source:** Gmail "Show original" full message headers
 
 ## Authentication Results
 
@@ -12,7 +12,9 @@ SPF: pass
 DMARC: pass
 ```
 
-### SPF
+## SPF
+
+### Result
 
 ```text
 spf=pass
@@ -20,19 +22,21 @@ spf=pass
 
 The receiving server reported that the sending IP was authorized by the SPF policy for the envelope sender domain.
 
-Sending IP:
+### Sending IP
 
 ```text
 [REDACTED]
 ```
 
-Envelope sender domain:
+### Envelope Sender Domain
 
 ```text
 mail.shopee.co.id
 ```
 
-### DKIM
+## DKIM
+
+### Result
 
 ```text
 dkim=pass
@@ -40,13 +44,13 @@ dkim=pass
 
 The message contained a valid DKIM signature.
 
-Signing domain:
+### Signing Domain
 
 ```text
 mail.shopee.co.id
 ```
 
-DKIM selector:
+### DKIM Selector
 
 ```text
 smtp1
@@ -54,19 +58,21 @@ smtp1
 
 The DKIM signing domain matches the domain shown in the visible `From:` address.
 
-### DMARC
+## DMARC
+
+### Result
 
 ```text
 dmarc=pass
 ```
 
-The authenticated `From:` domain was:
+### Authenticated From Domain
 
 ```text
 mail.shopee.co.id
 ```
 
-The header also reported:
+### Reported DMARC Policy
 
 ```text
 p=REJECT
@@ -78,11 +84,15 @@ These values describe the domain's DMARC policy and disposition. They do not ind
 
 ## Additional Delivery Evidence
 
+### Receiving Infrastructure
+
 The message was received by Gmail from:
 
 ```text
 smtp3223-fr4.mail-messaging.com
 ```
+
+### Transport Security
 
 The connection to Gmail used:
 
